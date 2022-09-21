@@ -1,7 +1,11 @@
 package com.ji.spring5.test.beanFactoryProcessor;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.ji.spring5.test.beanFactoryProcessor.mapper.Mapper1;
+import com.ji.spring5.test.beanFactoryProcessor.mapper.Mapper2;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.mapper.MapperFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -32,4 +36,18 @@ public class Config {
         dataSource.setPassword("root");
         return dataSource;
     }
+
+//    @Bean
+//    public MapperFactoryBean<Mapper1> mapper1(SqlSessionFactory sqlSessionFactory){
+//        MapperFactoryBean<Mapper1> factory = new MapperFactoryBean<>(Mapper1.class);
+//        factory.setSqlSessionFactory(sqlSessionFactory);
+//        return factory;
+//    }
+
+//    @Bean
+//    public MapperFactoryBean<Mapper2> mapper2(SqlSessionFactory sqlSessionFactory){
+//        MapperFactoryBean<Mapper2> factory = new MapperFactoryBean<>(Mapper2.class);
+//        factory.setSqlSessionFactory(sqlSessionFactory);
+//        return factory;
+//    }
 }

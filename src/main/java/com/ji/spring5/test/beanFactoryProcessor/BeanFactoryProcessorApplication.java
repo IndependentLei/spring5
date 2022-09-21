@@ -67,7 +67,7 @@ public class BeanFactoryProcessorApplication {
 //            }
 //        }
 
-        context.registerBean(ComponentScanPostProcessor.class);
+//        context.registerBean(ComponentScanPostProcessor.class); // 解析@ComponentScan注解的Bean工厂后置处理器
 
         System.out.println("-----------------");
 
@@ -96,7 +96,11 @@ public class BeanFactoryProcessorApplication {
 //        }
 
         // 初始化容器
-        context.registerBean(AtBeanPostProcessor.class);
+        context.registerBean(AtBeanPostProcessor.class); //解析@Bean注解的Bean工厂后置处理器
+
+        System.out.println("-----------------");
+
+        context.registerBean(MapperPostProcessor.class);
 
         context.refresh();
 
