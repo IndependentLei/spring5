@@ -1,6 +1,6 @@
 package com.ji.spring5.test.beanFactoryProcessor;
 
-import com.mysql.cj.util.StringUtils;
+import com.alibaba.druid.util.StringUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -36,7 +36,7 @@ public class AtBeanPostProcessor implements BeanFactoryPostProcessor {
                 // 指定自动装配模式
                 beanDefinitionBuilder.setAutowireMode(AbstractBeanDefinition.AUTOWIRE_CONSTRUCTOR);
                 // @Bean注解中有initMethod的这个方法
-                if (!StringUtils.isNullOrEmpty(initMethod)) {
+                if (!StringUtils.isEmpty(initMethod)) {
                     beanDefinitionBuilder.setInitMethodName(initMethod);
                 }
                 AbstractBeanDefinition beanDefinition = beanDefinitionBuilder.getBeanDefinition();
