@@ -9,6 +9,9 @@ public class CglibProxyTest {
 //            return method.invoke(cglibProxy,objectArgs);
 //            return mp.invoke(cglibProxy,objectArgs); // 没有使用反射,需要被代理的类
             return mp.invokeSuper(p,objectArgs); // 没有使用反射，需要代理类
+            /**
+             * cglib 生成两个FastClass：TargetFastClass 、ProxyFastClass
+             */
         });
         proxy.get();
         System.out.println(proxy.getInt(100));
