@@ -52,7 +52,7 @@ public class BeanFactoryProcessorApplication {
 //                    System.out.println("是否加了Component派生注解 >>>>> "+reader.getAnnotationMetadata().hasMetaAnnotation(Component.class.getName()));
 //
 //                    if(reader.getAnnotationMetadata().hasAnnotation(Component.class.getName()) || reader.getAnnotationMetadata().hasMetaAnnotation(Component.class.getName())){
-//                        // 有Component 注解 或 派生注解 @Controller  @Service
+//                        // 有Component 注解 或 派生注解 @TestController  @Service
 //
 //                        // 生成BeanDefiniton
 //                        AbstractBeanDefinition beanDefinition = BeanDefinitionBuilder.genericBeanDefinition(reader.getClassMetadata().getClassName()).getBeanDefinition();
