@@ -41,7 +41,10 @@ public class InitApplication {
             handlerMethods.forEach((k,v)-> System.out.println(k+"="+v));
 
             // 请求来了，获取控制器方法，返回处理器执行链对象
-            MockHttpServletRequest request = new MockHttpServletRequest("GET", "/test1");
+//            MockHttpServletRequest request = new MockHttpServletRequest("GET", "/test1");
+            MockHttpServletRequest request = new MockHttpServletRequest("GET", "/test5.json");
+//            request.addParameter("name","zhangSan");
+//            request.addHeader("token","token");
             MockHttpServletResponse response = new MockHttpServletResponse();
             HandlerExecutionChain chain = handlerMapping.getHandler(request);
             System.out.println(chain);
@@ -51,7 +54,10 @@ public class InitApplication {
                 // 调用方法的处理器
                 System.out.println(">>>>>>>>>>>>>>>>>> 调用方法的处理器");
                 MyRequestMappingHandlerAdapter handlerAdapter = applicationContext.getBean(MyRequestMappingHandlerAdapter.class);
-                ModelAndView modelAndView = handlerAdapter.invokeHandlerMethod(request, response, (HandlerMethod) chain.getHandler());
+                handlerAdapter.invokeHandlerMethod(request, response, (HandlerMethod) chain.getHandler());
+
+                String contentAsString = response.getContentAsString();
+                System.out.println("contentAsString >>>>>>>>>>>>> "+contentAsString);
                 // test1 >>>>>>>>>>
 
                 System.out.println(">>>>>>>>>>>>>>>>>> 参数解析器");

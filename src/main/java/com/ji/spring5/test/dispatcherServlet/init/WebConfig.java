@@ -5,9 +5,15 @@ import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactor
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 @Configuration
 @ComponentScan
@@ -41,7 +47,10 @@ public class WebConfig {
 
     @Bean
     public MyRequestMappingHandlerAdapter requestMappingHandlerAdapter(){
-        return new MyRequestMappingHandlerAdapter();
+        MyRequestMappingHandlerAdapter handlerAdapter = new MyRequestMappingHandlerAdapter();
+        handlerAdapter.setCustomArgumentResolvers(Arrays.asList(new TokenArgumentResolver()));
+        handlerAdapter.setCustomReturnValueHandlers(Arrays.asList(new JsonReturnValueHandler()));
+        return handlerAdapter;
     }
 }
 
