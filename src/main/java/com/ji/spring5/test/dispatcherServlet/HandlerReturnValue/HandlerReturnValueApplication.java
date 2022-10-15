@@ -3,11 +3,18 @@ package com.ji.spring5.test.dispatcherServlet.HandlerReturnValue;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.ji.spring5.test.dispatcherServlet.init.TestController;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.core.MethodParameter;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.JsonbHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.http.server.ServerHttpRequest;
+import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.method.support.HandlerMethodArgumentResolverComposite;
@@ -15,6 +22,7 @@ import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
@@ -54,15 +62,46 @@ public class HandlerReturnValueApplication {
         return composite;
     }
 
+    static class R{
+        private String code;
+        private Object data;
+
+        public R(String code,Object data){
+            this.code = code;
+            this.data = data;
+        }
+
+        public static R success (Object data){
+            return new R("200",data);
+        }
+    }
+
+    @ControllerAdvice
+    static class MyControllerAdvice implements ResponseBodyAdvice<Object> {
+        @Override
+        public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
+            return true;
+        }
+
+        @Override
+        public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
+            if(body instanceof R){
+                return body;
+            }
+            return R.success(body);
+        }
+    }
 
 
-    static class Controller{
+    @RestController
+    static class Controller {
 
         @ResponseBody
         public User get(){
             System.out.println("get >>>>>>>>>>");
             return new User("1");
         }
+
 
 
     }
