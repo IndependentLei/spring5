@@ -1,0 +1,1 @@
+com.ji.spring5.test.boot.autoConfig.one.MyImportSelector=com.ji.spring5.test.boot.autoConfig.one.WebConfig1
