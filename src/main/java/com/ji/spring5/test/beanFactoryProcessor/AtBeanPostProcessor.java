@@ -1,6 +1,5 @@
 package com.ji.spring5.test.beanFactoryProcessor;
 
-import com.alibaba.druid.util.StringUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -12,6 +11,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.type.MethodMetadata;
 import org.springframework.core.type.classreading.CachingMetadataReaderFactory;
 import org.springframework.core.type.classreading.MetadataReader;
+import org.springframework.util.StringUtils;
 
 import java.util.Set;
 

@@ -1,6 +1,6 @@
 package com.ji.spring5.test.dispatcherServlet.init;
 
-import com.alibaba.druid.support.json.JSONUtils;
+import com.alibaba.fastjson.JSON;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -18,7 +18,7 @@ public class JsonReturnValueHandler implements HandlerMethodReturnValueHandler {
 
     @Override
     public void handleReturnValue(Object returnValue, MethodParameter returnType, ModelAndViewContainer mavContainer, NativeWebRequest webRequest) throws Exception {
-        String s = JSONUtils.toJSONString(returnValue); // 获取返回值
+        String s = JSON.toJSONString(returnValue); // 获取返回值
         HttpServletResponse response = webRequest.getNativeResponse(HttpServletResponse.class);
         if(response != null) {
             response.setContentType("text/plain;charset=utf-8");
