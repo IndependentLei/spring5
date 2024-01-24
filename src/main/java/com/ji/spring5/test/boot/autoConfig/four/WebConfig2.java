@@ -4,6 +4,12 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.beans.Transient;
+import java.util.LinkedHashMap;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 @Configuration
 @ConditionalOnClass(exist = false,className = "com.alibaba.druid.pool.DruidDataSource") // 自定义条件装配注解
@@ -21,10 +27,16 @@ public class WebConfig2 {
         }
 
         @Override
+        @Transactional
         public String toString() {
             return "TestBean3{" +
                     "name='" + name + '\'' +
                     '}';
         }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(1);
+        throw new Error("异常了");
     }
 }

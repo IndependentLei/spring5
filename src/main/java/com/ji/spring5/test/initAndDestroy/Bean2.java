@@ -11,7 +11,7 @@ public class Bean2 implements DisposableBean {
 
     @PreDestroy
     public void preDestroy(){
-        System.out.println("preDestroy 销毁 >>>>>> 2");
+        System.out.println("preDestroy 销毁 >>>>>> 1");
     }
 
     @Override
